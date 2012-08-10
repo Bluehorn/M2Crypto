@@ -258,6 +258,15 @@ int ssl_ctx_use_cert_chain(SSL_CTX *ctx, char *file) {
     return i;
 }
 
+long ssl_ctx_add_extra_chain_cert(SSL_CTX *ctx, X509 *x509) {
+    long i;
+
+    if (!(i = SSL_CTX_add_extra_chain_cert(ctx, x509))) {
+        PyErr_SetString(_ssl_err, ERR_reason_error_string(ERR_get_error()));
+        return -1;
+    }
+    return i;
+}
 
 int ssl_ctx_use_privkey(SSL_CTX *ctx, char *file) {
     int i;
