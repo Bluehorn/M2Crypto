@@ -672,3 +672,19 @@ char *x509_name_oneline(X509_NAME *x) {
 }
 %}
 %typemap(ret) char *;
+
+%{
+PyObject *_wrap_x509_ptr(X509 *x509)
+{
+    return SWIG_NewPointerObj(x509, SWIGTYPE_p_X509, 0);
+}
+%}
+
+%init %{
+    {
+        PyObject *capsule;
+        capsule = PyCapsule_New((void *)_wrap_x509_ptr, "M2Crypto.m2._wrap_X509_ptr", NULL);
+        if (capsule)
+            PyModule_AddObject(m, "_wrap_X509_ptr", capsule);
+    }
+%}
