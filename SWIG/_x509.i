@@ -683,7 +683,7 @@ PyObject *_wrap_x509_ptr(X509 *x509)
 %init %{
     {
         PyObject *capsule;
-        capsule = PyCapsule_New((void *)_wrap_x509_ptr, "M2Crypto.m2._wrap_X509_ptr", NULL);
+        capsule = PyCapsule_New((void *)_wrap_x509_ptr, "M2Crypto.__m2crypto._wrap_X509_ptr", NULL);
         if (capsule)
             PyModule_AddObject(m, "_wrap_X509_ptr", capsule);
     }
